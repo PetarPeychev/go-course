@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main() {
 	var hand deck
@@ -11,5 +14,14 @@ func main() {
 		hand, deck = deck.deal(5)
 		hand.print()
 		fmt.Println()
+	}
+
+	deck.toFile("deck.txt")
+	deck, err := deckFromFile("deck.txt")
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	} else {
+		deck.print()
 	}
 }
